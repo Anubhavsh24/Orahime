@@ -4,7 +4,7 @@ A simple and elegant digital clock application built using **HTML, CSS, and Java
 
 ## 🌐 Live Demo
 
-[**View Live Clock →**](https://Anubhavsh24.github.io/OraHime/)
+[**View Live Clock →**](https://anubhavsh24.github.io/Orahime/)
 
 ## 📌 About the Project
 
