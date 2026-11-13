@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orahime</title>
+    <meta name="description" content="A premium clock application featuring a real-time clock, stopwatch, and alarm — built with pure HTML, CSS, and JavaScript.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <div class="app-container">
+
+        <header class="app-header">
+            <h1 class="app-title">
+                <span class="title-icon">◷</span>
+                Orahime
+            </h1>
+            <p class="app-subtitle">Time, Perfected.</p>
+        </header>
+
+        <nav class="tab-nav" role="tablist">
+            <button class="tab-btn active" data-tab="clock" role="tab" aria-selected="true" id="tab-clock">
+                <span class="tab-icon">🕐</span>
+                <span class="tab-label">Clock</span>
+            </button>
+            <button class="tab-btn" data-tab="stopwatch" role="tab" aria-selected="false" id="tab-stopwatch">
+                <span class="tab-icon">⏱️</span>
+                <span class="tab-label">Stopwatch</span>
+            </button>
+            <button class="tab-btn" data-tab="alarm" role="tab" aria-selected="false" id="tab-alarm">
+                <span class="tab-icon">⏰</span>
+                <span class="tab-label">Alarm</span>
+            </button>
+        </nav>
+
+        <main class="tab-content">
+
+            <section class="tab-panel active" id="panel-clock" role="tabpanel" aria-labelledby="tab-clock">
+                <div class="clock-card">
+                    <div class="clock-time-wrapper">
+                        <div class="clock-digits">
+                            <span class="digit-group" id="clock-hours">--</span>
+                            <span class="colon blink">:</span>
+                            <span class="digit-group" id="clock-minutes">--</span>
+                            <span class="colon blink">:</span>
+                            <span class="digit-group" id="clock-seconds">--</span>
+                        </div>
+                        <span class="ampm-badge" id="clock-ampm">--</span>
+                    </div>
+                    <div class="clock-date" id="clock-date">Loading date…</div>
+                    <div class="clock-ring">
+                        <svg viewBox="0 0 200 200" class="ring-svg">
+                            <circle cx="100" cy="100" r="90" class="ring-track"></circle>
+                            <circle cx="100" cy="100" r="90" class="ring-progress" id="clock-ring-progress"></circle>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tab-panel" id="panel-stopwatch" role="tabpanel" aria-labelledby="tab-stopwatch">
+                <div class="stopwatch-card">
+                    <div class="stopwatch-display">
+                        <span class="sw-digit" id="sw-hours">00</span>
+                        <span class="colon">:</span>
+                        <span class="sw-digit" id="sw-minutes">00</span>
+                        <span class="colon">:</span>
+                        <span class="sw-digit" id="sw-seconds">00</span>
+                    </div>
+                    <div class="stopwatch-status" id="sw-status">Ready</div>
+                    <div class="stopwatch-controls">
+                        <button class="btn btn-primary" id="sw-start">Start</button>
+                        <button class="btn btn-warning" id="sw-pause" disabled>Pause</button>
+                        <button class="btn btn-danger" id="sw-reset" disabled>Reset</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tab-panel" id="panel-alarm" role="tabpanel" aria-labelledby="tab-alarm">
+                <div class="alarm-card">
+                    <div class="alarm-input-group">
+                        <label class="alarm-label" for="alarm-time">Set Alarm Time</label>
+                        <input type="time" class="alarm-time-input" id="alarm-time">
+                    </div>
+                    <div class="alarm-controls">
+                        <button class="btn btn-primary" id="alarm-set">Set Alarm</button>
+                        <button class="btn btn-warning" id="alarm-stop" disabled>Stop Alarm</button>
+                        <button class="btn btn-danger" id="alarm-clear" disabled>Clear Alarm</button>
+                    </div>
+                    <div class="alarm-status" id="alarm-status">
+                        <span class="alarm-status-icon">🔕</span>
+                        <span class="alarm-status-text">No alarm set</span>
+                    </div>
+                    <div class="alarm-active-display hidden" id="alarm-active-display">
+                        <div class="alarm-active-icon">🔔</div>
+                        <div class="alarm-active-time" id="alarm-active-time">--:-- --</div>
+                        <div class="alarm-active-label">Alarm Set</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="app-footer">
+            <p>Built with HTML, CSS &amp; JavaScript</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

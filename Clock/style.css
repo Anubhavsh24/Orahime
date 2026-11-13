@@ -1,0 +1,754 @@
+/* ===================================================
+   CHRONOS — Modern Clock Website
+   Design System & Complete Styles
+   =================================================== */
+
+/* ---------- CSS Variables (Design Tokens) ---------- */
+:root {
+    /* Colors */
+    --bg-primary: #0a0a12;
+    --bg-secondary: #12121e;
+    --bg-card: rgba(20, 20, 35, 0.65);
+    --bg-card-hover: rgba(28, 28, 50, 0.75);
+
+    --text-primary: #f0f0f8;
+    --text-secondary: #9898b0;
+    --text-muted: #5a5a78;
+
+    --accent-blue: #6366f1;
+    --accent-purple: #a855f7;
+    --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+    --accent-glow: rgba(99, 102, 241, 0.35);
+
+    --btn-primary-bg: linear-gradient(135deg, #6366f1, #7c3aed);
+    --btn-warning-bg: linear-gradient(135deg, #f59e0b, #d97706);
+    --btn-danger-bg: linear-gradient(135deg, #ef4444, #dc2626);
+    --btn-disabled-bg: #1e1e30;
+
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
+
+    /* Typography */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+    /* Sizing */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset & Base ---------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ---------- Ambient Background Orbs ---------- */
+.bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-orb-1 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent 70%);
+    top: -100px;
+    left: -100px;
+    animation: orb-float-1 18s ease-in-out infinite;
+}
+
+.bg-orb-2 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.35), transparent 70%);
+    bottom: -80px;
+    right: -80px;
+    animation: orb-float-2 22s ease-in-out infinite;
+}
+
+.bg-orb-3 {
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 70%);
+    top: 50%;
+    left: 60%;
+    animation: orb-float-3 15s ease-in-out infinite;
+}
+
+@keyframes orb-float-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(60px, 40px) scale(1.1); }
+    66%      { transform: translate(-30px, 70px) scale(0.95); }
+}
+
+@keyframes orb-float-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(-50px, -30px) scale(1.05); }
+    66%      { transform: translate(40px, -60px) scale(0.9); }
+}
+
+@keyframes orb-float-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-40px, 50px) scale(1.15); }
+}
+
+/* ---------- App Container ---------- */
+.app-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 580px;
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+    text-align: center;
+}
+
+.app-title {
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: -0.5px;
+}
+
+.title-icon {
+    font-size: 1.6rem;
+    -webkit-text-fill-color: initial;
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+}
+
+.app-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ---------- Tab Navigation ---------- */
+.tab-nav {
+    display: flex;
+    gap: 6px;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 5px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.tab-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 8px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    position: relative;
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.tab-btn.active {
+    color: #fff;
+    background: var(--accent-gradient);
+    box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.tab-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.tab-label {
+    letter-spacing: 0.3px;
+}
+
+/* ---------- Tab Panels ---------- */
+.tab-content {
+    width: 100%;
+}
+
+.tab-panel {
+    display: none;
+    animation: panel-fade-in 0.4s ease;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes panel-fade-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Shared Card Styles ---------- */
+.clock-card,
+.stopwatch-card,
+.alarm-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: 40px 28px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow accent line at top of cards */
+.clock-card::before,
+.stopwatch-card::before,
+.alarm-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: var(--accent-gradient);
+    border-radius: 0 0 4px 4px;
+}
+
+/* ===================================================
+   CLOCK PANEL
+   =================================================== */
+.clock-time-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+}
+
+.clock-digits {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.digit-group {
+    font-family: var(--font-mono);
+    font-size: 3.6rem;
+    font-weight: 600;
+    letter-spacing: -1px;
+    color: var(--text-primary);
+    min-width: 2ch;
+    text-align: center;
+}
+
+.colon {
+    font-family: var(--font-mono);
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: var(--accent-blue);
+    margin: 0 2px;
+}
+
+.colon.blink {
+    animation: colon-blink 1s steps(1) infinite;
+}
+
+@keyframes colon-blink {
+    0%, 50%  { opacity: 1; }
+    51%, 100% { opacity: 0.25; }
+}
+
+.ampm-badge {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-purple);
+    background: rgba(168, 85, 247, 0.12);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 1px;
+    align-self: center;
+}
+
+.clock-date {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* Seconds ring */
+.clock-ring {
+    width: 120px;
+    height: 120px;
+    margin-top: 8px;
+}
+
+.ring-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.ring-track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 3;
+}
+
+.ring-progress {
+    fill: none;
+    stroke: url(#ring-gradient);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 565.49;  /* 2 * PI * 90 */
+    stroke-dashoffset: 565.49;
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+/* Fallback solid color since inline SVG gradient is in HTML */
+.ring-progress {
+    stroke: var(--accent-blue);
+}
+
+/* ===================================================
+   STOPWATCH PANEL
+   =================================================== */
+.stopwatch-display {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sw-digit {
+    font-family: var(--font-mono);
+    font-size: 4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 2ch;
+    text-align: center;
+}
+
+.stopwatch-display .colon {
+    font-size: 3.6rem;
+}
+
+.stopwatch-status {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.stopwatch-status.running {
+    color: #22c55e;
+}
+
+.stopwatch-status.paused {
+    color: #f59e0b;
+}
+
+.stopwatch-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ===================================================
+   ALARM PANEL
+   =================================================== */
+.alarm-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.alarm-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.alarm-time-input {
+    font-family: var(--font-mono);
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 14px 24px;
+    text-align: center;
+    outline: none;
+    transition: all var(--transition-smooth);
+    width: 100%;
+    max-width: 260px;
+    color-scheme: dark;
+}
+
+.alarm-time-input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.alarm-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.alarm-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.alarm-status-icon {
+    font-size: 1.2rem;
+}
+
+.alarm-active-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: var(--radius-md);
+    padding: 20px 32px;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.alarm-active-display.hidden {
+    display: none;
+}
+
+.alarm-active-icon {
+    font-size: 1.6rem;
+    animation: bell-ring 1.5s ease-in-out infinite;
+}
+
+@keyframes bell-ring {
+    0%, 100% { transform: rotate(0deg); }
+    10%      { transform: rotate(12deg); }
+    20%      { transform: rotate(-12deg); }
+    30%      { transform: rotate(8deg); }
+    40%      { transform: rotate(-8deg); }
+    50%      { transform: rotate(0deg); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+    50%      { box-shadow: 0 0 20px 4px rgba(99, 102, 241, 0.15); }
+}
+
+.alarm-active-time {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+}
+
+.alarm-active-label {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Alarm ringing state */
+.alarm-card.ringing {
+    animation: alarm-flash 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes alarm-flash {
+    from { border-color: rgba(239, 68, 68, 0.3); }
+    to   { border-color: rgba(239, 68, 68, 0.7); box-shadow: 0 0 40px rgba(239, 68, 68, 0.2); }
+}
+
+/* ===================================================
+   BUTTONS
+   =================================================== */
+.btn {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: #fff;
+    letter-spacing: 0.3px;
+    transition: all var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0);
+    transition: background var(--transition-fast);
+}
+
+.btn:hover:not(:disabled)::after {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.btn-primary {
+    background: var(--btn-primary-bg);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+    box-shadow: 0 6px 24px rgba(99, 102, 241, 0.45);
+    transform: translateY(-1px);
+}
+
+.btn-warning {
+    background: var(--btn-warning-bg);
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+}
+
+.btn-warning:hover:not(:disabled) {
+    box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4);
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: var(--btn-danger-bg);
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.25);
+}
+
+.btn-danger:hover:not(:disabled) {
+    box-shadow: 0 6px 24px rgba(239, 68, 68, 0.4);
+    transform: translateY(-1px);
+}
+
+.btn:disabled {
+    background: var(--btn-disabled-bg);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ===================================================
+   FOOTER
+   =================================================== */
+.app-footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+/* ===================================================
+   RESPONSIVE DESIGN
+   =================================================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .digit-group {
+        font-size: 2.8rem;
+    }
+
+    .colon {
+        font-size: 2.4rem;
+    }
+
+    .sw-digit {
+        font-size: 3.2rem;
+    }
+
+    .stopwatch-display .colon {
+        font-size: 2.8rem;
+    }
+
+    .alarm-active-time {
+        font-size: 1.6rem;
+    }
+
+    .clock-card,
+    .stopwatch-card,
+    .alarm-card {
+        padding: 32px 20px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .app-container {
+        padding: 24px 14px;
+        gap: 20px;
+    }
+
+    .app-title {
+        font-size: 1.6rem;
+    }
+
+    .digit-group {
+        font-size: 2.2rem;
+    }
+
+    .colon {
+        font-size: 1.8rem;
+    }
+
+    .ampm-badge {
+        font-size: 0.82rem;
+        padding: 4px 10px;
+    }
+
+    .clock-date {
+        font-size: 0.88rem;
+    }
+
+    .clock-ring {
+        width: 90px;
+        height: 90px;
+    }
+
+    .sw-digit {
+        font-size: 2.6rem;
+    }
+
+    .stopwatch-display .colon {
+        font-size: 2.2rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.82rem;
+    }
+
+    .alarm-time-input {
+        font-size: 1.4rem;
+        padding: 12px 18px;
+    }
+
+    .alarm-active-time {
+        font-size: 1.4rem;
+    }
+
+    .tab-btn {
+        padding: 10px 6px;
+    }
+
+    .tab-icon {
+        font-size: 1.1rem;
+    }
+
+    .tab-label {
+        font-size: 0.72rem;
+    }
+
+    .clock-card,
+    .stopwatch-card,
+    .alarm-card {
+        padding: 28px 16px;
+        border-radius: var(--radius-lg);
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 360px) {
+    .clock-time-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .digit-group {
+        font-size: 2rem;
+    }
+
+    .sw-digit {
+        font-size: 2.2rem;
+    }
+
+    .stopwatch-controls,
+    .alarm-controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
